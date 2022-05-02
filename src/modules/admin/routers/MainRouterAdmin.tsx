@@ -1,11 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 import { Error404 } from "../components";
+import { HomePage } from "../pages";
 
 export const MainRouterAdmin = () => {
   return (
     <Routes>
-      <Route index element={<h1>Main Router Admin</h1>}></Route>
-      <Route path="dashboard" element={<h1>Main Router Admin</h1>}></Route>
+      <Route index element={<HomePage />}></Route>
+      <Route path="dashboard" element={<HomePage />}></Route>
 
       <Route path="*" element={<Error404 />}></Route>
     </Routes>

@@ -10,7 +10,7 @@ export const MainRouter = () => {
     <BrowserRouter>
       <Routes>
         {/* Default route */}
-        <Route index element={<HomePage />}></Route>
+        {<Route index element={<HomePage />}></Route>}
 
         {/* Public routes */}
         <Route path="/*" element={<MainRouterPublic />}></Route>
