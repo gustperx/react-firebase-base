@@ -8,10 +8,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.8.8",
     "firebase": "^9.7.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-router-dom": "6"
+    "react-hook-form": "^7.30.0",
+    "react-router-dom": "6",
+    "yup": "^0.32.11",
+    "yup-locales": "^1.2.4"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",

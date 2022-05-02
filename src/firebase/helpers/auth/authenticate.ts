@@ -38,37 +38,23 @@ export const onAuthState = (callback: NextOrObserver<User>) => {
 export const signOutFirebase = () => {
   signOut(auth)
     .then(() => {
-      // Sign-out successful.
       console.log("Se cerro la sesion");
     })
     .catch((error) => {
-      // An error happened.
       console.log("No pudimos cerrar la sesion");
     });
 };
 
-/* export const createWithEmailAndPassword = (
+export const createWithEmailAndPassword = (
   registerCredentials: RegisterCredentials
 ) => {
   const { email, password } = registerCredentials;
   console.log("register");
-  return createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
-      console.log("Usuario creado");
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(error);
-      console.log("Code ", errorCode);
-      console.log("Message ", errorMessage);
-    });
-}; */
+  return createUserWithEmailAndPassword(auth, email, password);
+};
 
-/* export const updateName = (user: User, name: string) => {
-  updateProfile(user, {
+export const updateNameUser = (user: User, name: string) => {
+  return updateProfile(user, {
     displayName: name,
   });
-}; */
+};
