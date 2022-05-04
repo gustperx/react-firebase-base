@@ -1,33 +1,17 @@
-import { FirebaseError } from "firebase/app";
 import { FC } from "react";
-import { useNavigate } from "react-router-dom";
-import { FirestoreErrors } from "../../../firebase/types";
-import { Product, ProductElement } from "../models";
+import { ProductElement } from "../models";
 
 interface Props {
   products: ProductElement[];
+  handleEdit: (id: string) => void;
+  handleDelete: (id: string) => void;
 }
 
-export const TableList: FC<Props> = ({ products = [] }) => {
-  const navigate = useNavigate();
-
-  const handleEdit = (id: string) => {
-    navigate(`/admin/edit/${id}`);
-  };
-
-  const handleDelete = async (id: string) => {
-    try {
-      await Product.destroy(id);
-      console.log("product delete: ", id);
-    } catch (error: unknown) {
-      if (error instanceof FirebaseError) {
-        console.log(FirestoreErrors[error.code]);
-      } else {
-        console.log("Error generico");
-      }
-    }
-  };
-
+export const TableList: FC<Props> = ({
+  products,
+  handleEdit,
+  handleDelete,
+}) => {
   return (
     <table>
       <thead>

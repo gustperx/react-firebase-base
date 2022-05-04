@@ -1,5 +1,5 @@
 import { FirebaseError } from "firebase/app";
-import { useEffect, useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { FirestoreErrors } from "../../../firebase/types";
 import { ProductElement, Product } from "../models/Product";
@@ -30,6 +30,24 @@ export const ProductList = () => {
     navigate("/admin/create");
   };
 
+  const handleEdit = (id: string) => {
+    navigate(`/admin/edit/${id}`);
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      await Product.destroy(id);
+      console.log("product delete: ", id);
+      setProducts(products.filter((item) => item.id !== id));
+    } catch (error: unknown) {
+      if (error instanceof FirebaseError) {
+        console.log(FirestoreErrors[error.code]);
+      } else {
+        console.log("Error generico");
+      }
+    }
+  };
+
   return (
     <>
       <h3>Lista de productos</h3>
@@ -37,7 +55,15 @@ export const ProductList = () => {
       <button onClick={handleCreate}>Crear producto</button>
 
       <hr />
-      {products ? <TableList products={products} /> : <h5>No hay productos</h5>}
+      {products ? (
+        <TableList
+          products={products}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+        />
+      ) : (
+        <h5>No hay productos</h5>
+      )}
     </>
   );
 };
