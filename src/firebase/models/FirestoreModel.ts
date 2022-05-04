@@ -14,21 +14,13 @@ export interface Attributes<T> {
 
 export class FirestoreModel {
   protected static async retriveDoc(tableName: string, id: string) {
-    try {
-      const doc = await firestoreRetrieveDoc(tableName, id);
-      return formatDoc(doc);
-    } catch (error) {
-      throw new Error("Error retriveDoc");
-    }
+    const doc = await firestoreRetrieveDoc(tableName, id);
+    return formatDoc(doc);
   }
 
   protected static async retriveAllDoc(tableName: string) {
-    try {
-      const snapshot = await firestoreRetrieveAllDoc(tableName);
-      return formatDocs(snapshot);
-    } catch (error) {
-      throw new Error("Error retriveAllDoc");
-    }
+    const snapshot = await firestoreRetrieveAllDoc(tableName);
+    return formatDocs(snapshot);
   }
 
   protected static createDoc(tableName: string, attributes: Attributes<any>) {
@@ -40,10 +32,10 @@ export class FirestoreModel {
     id: string,
     attributes: Attributes<any>
   ) {
-    firestoreUpdateDoc(tableName, id, attributes);
+    return firestoreUpdateDoc(tableName, id, attributes);
   }
 
   protected static deleteDoc(tableName: string, id: string) {
-    firestoreDeleteDoc(tableName, id);
+    return firestoreDeleteDoc(tableName, id);
   }
 }
