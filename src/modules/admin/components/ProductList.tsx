@@ -3,7 +3,7 @@ import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { FirestoreErrors } from "../../../firebase/types";
 import { ProductElement, Product } from "../models/Product";
-import { TableList } from "./TableList";
+import { TableList } from "./";
 
 export const ProductList = () => {
   const [products, setProducts] = useState<ProductElement[]>([]);
