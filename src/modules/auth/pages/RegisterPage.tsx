@@ -24,7 +24,6 @@ export const RegisterPage = () => {
   });
 
   const onSubmit: SubmitHandler<AuthRegister> = (data) => {
-    console.log("Submit", data);
     handleRegister(data);
     reset();
   };

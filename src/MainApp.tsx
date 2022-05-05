@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useMemo } from "react";
 import { getAuth } from "firebase/auth";
 import { AuthContext } from "./modules/auth/context/AuthContext";
 import { MainRouter } from "./routers/MainRouter";
@@ -13,10 +13,6 @@ interface AuthContext {
 const auth = getAuth();
 export const MainApp = () => {
   const [user, setUser] = useState<AuthContext>({ logged: false });
-  useEffect(() => {
-    console.log("llamo aqui");
-    onAuthState(userCallback);
-  }, [auth]);
 
   const userCallback = (user: any) => {
     if (user) {
@@ -31,6 +27,8 @@ export const MainApp = () => {
       setUser({ logged: false });
     }
   };
+
+  useMemo(() => onAuthState(userCallback), [auth]);
 
   return (
     <AuthContext.Provider value={user}>

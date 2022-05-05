@@ -9,6 +9,7 @@ import { schemaLogin } from "../validations";
 import { AuthCredentials, AuthErrors } from "../types";
 
 export const LoginPage = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>();
 
   const {
@@ -21,14 +22,15 @@ export const LoginPage = () => {
   });
 
   const onSubmit: SubmitHandler<AuthCredentials> = (data) => {
-    console.log("Submit", data);
     handleLogin(data);
     reset();
   };
 
   const handleLogin = async (data: AuthCredentials) => {
     try {
+      setLoading(true);
       await signInEmailAndPassword(data);
+      setLoading(false);
       console.log("Login Process Ok");
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
@@ -36,6 +38,7 @@ export const LoginPage = () => {
       } else {
         setError("Error generico");
       }
+      setLoading(false);
     }
   };
 
@@ -44,6 +47,7 @@ export const LoginPage = () => {
       <h1>Login Page</h1>
 
       <p>{error}</p>
+      <p>{loading ? "Realizando autenticación espere..." : ""}</p>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
