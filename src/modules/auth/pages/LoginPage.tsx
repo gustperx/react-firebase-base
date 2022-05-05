@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { FirebaseError } from "firebase/app";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -71,7 +71,9 @@ export const LoginPage = () => {
           {errors.password && <p>{errors.password.message}</p>}
         </div>
         <div>
-          <button type="submit">Login</button>
+          <button disabled={loading} type="submit">
+            Login
+          </button>
         </div>
       </form>
     </>

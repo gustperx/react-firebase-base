@@ -1,18 +1,12 @@
 import { useState, useMemo } from "react";
 import { getAuth } from "firebase/auth";
-import { AuthContext } from "./modules/auth/context/AuthContext";
+import { AuthContext, IAuthContext } from "./modules/auth/context/AuthContext";
 import { MainRouter } from "./routers/MainRouter";
 import { onAuthState } from "./firebase/helpers/auth";
 
-interface AuthContext {
-  name?: string;
-  email?: string;
-  logged: boolean;
-}
-
 const auth = getAuth();
 export const MainApp = () => {
-  const [user, setUser] = useState<AuthContext>({ logged: false });
+  const [user, setUser] = useState<IAuthContext>({ logged: false });
 
   const userCallback = (user: any) => {
     if (user) {
